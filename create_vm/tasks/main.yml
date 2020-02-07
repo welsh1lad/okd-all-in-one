@@ -1,0 +1,4 @@
+---
+  - name: Creating our VM's within ESXi Envronment
+    include_tasks: create_vm.yml
+   

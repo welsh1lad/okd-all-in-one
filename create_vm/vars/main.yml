@@ -1,0 +1,2 @@
+---
+    ansible_python_interpreter: "/opt/python-2.7/Python-2.7.16/python"
