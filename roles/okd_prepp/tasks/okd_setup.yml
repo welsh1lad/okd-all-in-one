@@ -37,7 +37,7 @@
          - dnsmasq
          - pyOpenSSL
 
-      state: present
+        state: present
 
     - name: now update the node
       yum:
@@ -86,7 +86,8 @@
         dest: /root/OKD/
         version: release-3.11
       become: yes
-                
+      ignore_error: yes
+          
     - name: copy over OKD Inventory File
       copy:
         src:  hosts_aio2
@@ -106,5 +107,20 @@
         line: '#no-resolve'
         state: present
 
+    - name: remove old entry in /etc/hosts file 
+      lineinfile:
+        path: /etc/hosts
+        regexp: 'DRS-TEST01-OKD'
+        line: '10.60.10.27  master.uat.okd.insurance.lan'
+       
+    - name: restart dnsmasq
+      service:
+        name: dnsmasq
+        state: running
+        enabled: yes
 
-
+    - name: remove uneeded netwok interface
+      file:
+        path: /etc/sysconfig/network-scripts/ifcfg-ens224
+        state: absent
+   

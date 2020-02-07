@@ -1,6 +1,6 @@
 ---
-   ram: 4096
-   cpu: 2
+   ram: 16384
+   cpu: 6
    vm_password: gold
    gateway: 10.129.20.1
    netmask: 255.255.255.0
