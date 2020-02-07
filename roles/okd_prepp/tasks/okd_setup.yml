@@ -92,6 +92,18 @@
         dest: /root/OKD/
         mode: '0755'
 
+    - name: Copy resolve.conf to Upstream
+      copy:
+        src: /etc/resolv.conf
+        dest: /etc/resolv.con.upstrem
+        remote_src: yes
+
+    - name: Remove no-resolve from origin-dns.conf
+      lineinfile:
+        path: /root/OKD/roles/openshift_node/templates/origin-dns.conf.j2
+        regexp: '^no-resolv'
+        line: '#no-resolve'
+        state: present
 
 
 
