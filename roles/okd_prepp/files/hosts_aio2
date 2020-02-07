@@ -1,0 +1,90 @@
+#bare minimum hostfile
+
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[OSEv3:vars]
+# if your target hosts are Fedora uncomment this
+#ansible_python_interpreter=/usr/bin/python3
+#
+### We are deploying OKD originally call ORIGIN so deploy type is origin
+
+openshift_deployment_type=origin
+
+##
+# openshift SDN Network 
+openshift_portal_net=172.30.0.0/16
+
+# localhost likely doesn't meet the minimum requirements
+# This is just for testing so ignore SPEC Chackes
+openshift_disable_check=disk_availability,memory_availability
+
+##
+# Openshift COnfig map for the nodes , we are selecting all-in-one mapping
+openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
+
+######
+# default version 3.11
+#openshift_release=3.11
+
+#oreg_url='docker.io/openshift/origin-${component}:${version}'
+
+##
+#
+# Aditional repositorties named here
+#
+openshift_examples_modify_imagestreams=true
+openshift_additional_repos=[{'id': 'openshift-origin-copr', 'name': 'OpenShift Origin COPR', 'baseurl': 'https://copr-be.cloud.fedoraproject.org/results/maxamillion/origin-next/epel-7-$basearch/', 'enabled': 1, 'gpgcheck': 1, 'gpgkey': 'https://copr-be.cloud.fedoraproject.org/results/maxamillion/origin-next/pubkey.gpg'}]
+
+##
+# State that this is a test and Docker registry is insecure
+openshift_docker_hosted_registry_insecure=true
+##
+#
+#Authentication module used will be htaccess basic for testing - Live will use Ldap
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+
+##
+#
+# master node URL
+openshift_master_cluster_hostname=master.uat.okd.insurance.lan
+##
+#
+# New apps will have the following postfix URL
+openshift_master_default_subdomain=apps.uat.okd.insurance.lan
+
+os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
+
+###########################################################################
+### OpenShift Service Catalog Vars
+###########################################################################
+
+# default=true
+openshift_enable_service_catalog=false
+
+# default=true
+template_service_broker_install=false
+#openshift_template_service_broker_namespaces=['openshift']
+
+# default=true
+ansible_service_broker_install=false
+#ansible_service_broker_local_registry_whitelist=['.*-apb$']
+
+###########################################################################
+### OpenShift Cockpit Vars and plugins
+###########################################################################
+
+# Disable cockpit
+osm_use_cockpit=false
+
+[masters]
+master ansible_connection=local
+
+[etcd]
+master ansible_connection=local
+
+[nodes]
+# openshift_node_group_name should refer to a dictionary with matching key of name in list openshift_node_groups.
+master ansible_connection=local openshift_node_group_name="node-config-all-in-one"

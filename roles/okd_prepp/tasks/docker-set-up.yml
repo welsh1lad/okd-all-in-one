@@ -1,0 +1,62 @@
+---
+
+   - name: Create partition
+     parted:
+       label: gpt
+       device: /dev/sdb
+       number: 1
+       flags: [ lvm ]
+       part_type: primary
+       state: present
+       part_end: 100%
+
+
+   - name: Create additional file system
+     filesystem:
+       fstype: lvm
+       dev: /dev/sdb1
+    
+     
+   - name: Create Physical Volumn group on the LVM Group on newly created Dirve
+     lvg:
+       vg: docker-vg
+       pvs: /dev/sdb1
+       state: present
+ 
+
+   - name: install Docker
+     package:
+       name: docker
+       state: present
+
+   - name: Stop Docker
+     service:
+       name: docker
+       state: stopped
+
+   - name: Remove original storage
+     file:
+       path: /etc/sysconfig/docker-storage-setup
+       state: absent
+   
+   - name: create new Docker-Storage-Set File
+     file:
+       path: /etc/sysconfig/docker-storage-setup
+       state: touch
+
+   - name: Add Docker Storage setup 
+     blockinfile:
+       path: /etc/sysconfig/docker-storage-setup
+       backup: yes
+       block: | 
+         dev=/dev/mapper/docker-vg
+         VG=docker-vg
+
+   - name: Configure docker storage
+     command: docker-storage-setup
+
+   - name: Start - Docker
+     service:
+       name: docker
+       state: running
+  

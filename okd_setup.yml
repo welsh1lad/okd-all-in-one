@@ -1,7 +1,5 @@
 ---
-  - hosts: "{{ target }}"
-
-    tasks:
+    become: yes
     - name: Remove Swap
       command: swapoff -a
     
