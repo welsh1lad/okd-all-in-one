@@ -1,5 +1,5 @@
 ---
    - name: Start Preparing Node to Accecpt install of OKD
      become: yes
-     import_tasks:  okd_setup.yml
+     include_tasks: okd_setup.yml
    

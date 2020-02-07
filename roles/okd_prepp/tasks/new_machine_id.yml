@@ -1,0 +1,6 @@
+ - name: change the machine_id
+   shell: 'systemd-machine-id-setup'
+   register: machine_id
+
+ - debug:
+   msg: "{{ machine_id.stdout_lines }}"
