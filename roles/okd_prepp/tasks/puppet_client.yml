@@ -1,0 +1,5 @@
+---
+ - name: download and install the puppet agent
+   command: 'curl -k https://epdcpuppv01.insurance.lan:8140/packages/current/install.bash | sudo bash'
+
+
