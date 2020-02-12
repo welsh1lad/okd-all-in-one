@@ -1,7 +1,7 @@
 ---
  - hosts: localhost
    roles:
-   #  - create_vm
- - hosts: all
+     - create_vm
+ - hosts: "{{ target }}"
    roles:
      - okd_prepp
