@@ -3,4 +3,5 @@
      become: yes
      include_tasks: okd_setup.yml
      include_tasks: create_fact.yml
+     include_tasks: puppet_client.yml
    
