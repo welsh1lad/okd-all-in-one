@@ -2,6 +2,8 @@
  - hosts: localhost
    roles:
      - create_vm
- - hosts: "{{ target }}"
-   roles:
-     - okd_prepp
+   tasks:   
+   - name: set up a pause and wait for new machine to settle
+     wait_for:
+       path: /etc/resolv.conf
+   

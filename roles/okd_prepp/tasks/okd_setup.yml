@@ -70,39 +70,81 @@
         dest: /etc/resolve.conf.upstream
         remote_src: yes
 
-    - name: set hostname
-      hostname:
-        name: master
-
     - name: Set up directory for git clone
       file:
         path: /root/OKD
         state: directory
         mode: '0755'
 
+    - name: check for git repo already installed
+      stat:
+        path: /root/OKD/OKD_Install
+      register: git
+      
+
     - name: Download and install openshift-ansible
       git:
         repo: 'https://github.com/openshift/openshift-ansible.git'
-        dest: /root/OKD/
+        dest: /root/OKD/OKD_Install
         version: release-3.11
       become: yes
-      ignore_error: yes
+      when: git.stat.exists == False
           
     - name: copy over OKD Inventory File
       copy:
         src:  hosts_aio2
         dest: /root/OKD/
         mode: '0755'
-
+ 
     - name: Copy resolve.conf to Upstream
       copy:
         src: /etc/resolv.conf
         dest: /etc/resolv.con.upstrem
         remote_src: yes
+   
+    - name: Reconfigure Resolv.conf
+      copy:
+        src: resolv.conf
+        dest: /etc/resolv.conf
+        backup: yes
+
+    - name: Make sure gateway is configured
+      lineinfile:
+         path: /etc/sysconfig/network-scripts/ifcfg-ens192
+         state: present
+         regexp: '^GATEWAY'
+         insertafter: '^NAME'
+         line: 'GATEWAY=10.60.10.1'
+    
+    - name: Network Peers no
+      lineinfile:
+         path: /etc/sysconfig/network-scripts/ifcfg-ens192
+         state: present
+         regexp: '^PEERSDNS'
+         line: 'PEERSDNS=no'
+
+    - name: set hostname
+      hostname:
+        name: master
+
+    - name: prepare static routing
+      copy:
+        src: route-ens192
+        dest: /etc/sysconfig/network-scripts/route-ens192
+
+    - name: restart networking 
+      service:
+        name: network
+        state: restarted
+      async: 120
+      poll: 0
+           
+    - name: Wait for system to become reachable
+      wait_for_connection:
 
     - name: Remove no-resolve from origin-dns.conf
       lineinfile:
-        path: /root/OKD/roles/openshift_node/templates/origin-dns.conf.j2
+        path: /root/OKD/OKD_Install/roles/openshift_node/templates/origin-dns.conf.j2
         regexp: '^no-resolv'
         line: '#no-resolve'
         state: present
