@@ -1,5 +1,5 @@
 ---
-   ram: 16384
+   ram: 9384
    cpu: 6
    vm_password: gold
    gateway: 10.129.20.1
