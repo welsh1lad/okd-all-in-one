@@ -53,8 +53,8 @@
     register: deploy
     with_items:
        - { vm_name: "{{ vm_name }}", hostname: "{{ vm_hostname }}", addr: "{{ vm_ip }}", network_name: "{{ vm_network_name }}"  }
-       - { vm_name: " DRS-TEST03-OKD", hostname: " DRS-TEST03-OKD, addr: "10.60.10.32", network_name: "{{ vm_network_name }}"  }
-       - { vm_name: " DRS-TEST04-OKD", hostname: " DRS-TEST04-OKD", addr: "10.60.10.33", network_name: "{{ vm_network_name }}"  }
+       - { vm_name: "DRS-TEST03-OKD", hostname: "DRS-TEST03-OKD", addr: "10.60.10.32", network_name: "{{ vm_network_name }}"  }
+       - { vm_name: "DRS-TEST04-OKD", hostname: "DRS-TEST04-OKD", addr: "10.60.10.33", network_name: "{{ vm_network_name }}"  }
 
    
 
