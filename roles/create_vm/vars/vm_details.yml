@@ -1,7 +1,7 @@
 ---
   # Vriables for the vm 
-  vm_name: DRS-TEST04-OKD
-  vm_hostname:  DRS-TEST04-OKD
+  vm_name: DRS-TEST05-OKD
+  vm_hostname:  DRS-TEST05-OKD
   vm_ip: 10.60.10.34
   vm_network_name: Management_VM_210
   
