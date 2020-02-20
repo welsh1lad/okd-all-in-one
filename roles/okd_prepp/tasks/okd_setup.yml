@@ -79,7 +79,7 @@
     - name: copy new resolv to upstream
       copy:
         src: /etc/resolv.conf
-        dest: /etc/resolve.conf.upstream
+        dest: /etc/resolv.conf.upstream
         remote_src: yes
 
     - name: Create a new and correctected resolv.conf file
