@@ -51,7 +51,12 @@
       yum:
         name: https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
         state: installed
-    
+
+    - name: check for git repo already installed
+      stat:
+        path: /root/OKD/OKD_Install
+      register: git
+
     - name: Download and install openshift-ansible
       git:
         repo: 'https://github.com/openshift/openshift-ansible.git'
@@ -90,20 +95,6 @@
         path: /root/OKD
         state: directory
         mode: '0755'
-
-    - name: check for git repo already installed
-      stat:
-        path: /root/OKD/OKD_Install
-      register: git
-      
-
-    - name: Download and install openshift-ansible
-      git:
-        repo: 'https://github.com/openshift/openshift-ansible.git'
-        dest: /root/OKD/OKD_Install
-        version: release-3.11
-      become: yes
-      when: git.stat.exists == False
           
     - name: copy over OKD Inventory File
       copy:
