@@ -64,11 +64,6 @@
         version: release-3.11
       become: yes
       when: git.stat.exists == False
-    
-    #- name: Install Openshift-Ansible Playbooks
-    #  yum:
-    #    name: openshift-ansible
-    #    state: installed
 
     
     - name: Create DNSMASQ Conf file
@@ -82,7 +77,7 @@
         dest: /etc/resolv.conf.upstream
         remote_src: yes
       backup: yes
-      
+
     - name: Create a new and correctected resolv.conf file
       template:
         src: resolv.j2

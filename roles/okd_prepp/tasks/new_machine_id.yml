@@ -3,4 +3,9 @@
    register: machine_id
 
  - debug:
-   msg: "{{ machine_id.stdout_lines }}"
+   msg: "{{ machine_id.stdout_lines }}" 
+
+ - name: Set hostname of the server
+   hostname: 
+     name: "{{ ansible_hostname }}.{{ search_domain2 }}"
+

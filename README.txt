@@ -30,6 +30,8 @@ Get openshift playbooks
 Install the atomic package if it is not installed on the host system:
 $ yum install atomic
 
+#############################################################################
+#############################################################################
 
 pages
 Prepp
@@ -46,6 +48,13 @@ https://github.com/williamcaban/openshift-lab/blob/master/inventory-host-aio-TEM
 
 Install
 https://docs.okd.io/3.11/install/stand_alone_registry.html
+
+Checks to complete after the installation
+https://docs.okd.io/3.11/day_two_guide/run_once_tasks.html
+
+##############################################################################
+##############################################################################
+##############################################################################
 
 ALL-IN-ONE
 BLOG
@@ -91,7 +100,7 @@ give admin permision
 
  oc adm policy add-cluster-role-to-user cluster-admin admin
 
-
+!!! Run the above user creation twice -- possibel bug.!!
 
  -------------------------------------------------------------------
  openshift_pkg_version=-3.11.170
@@ -165,3 +174,12 @@ bind-dynamic
 min-port=1024
 except-interface=lo
 # End of config
+
+
+---------------------------------------
+
+gary 10.60.10.32    Good up and runnin
+
+luk 10.60.10.33     Good up and Running
+
+rob 10.60.10.28     Good up and Running
