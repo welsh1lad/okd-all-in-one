@@ -74,8 +74,8 @@
       copy:
         dest: "/etc/resolv.conf"
         content:
-        search cluster.local uat.okd.insurance.lan
-        nameserver {{ ansible_host }}
+          search cluster.local uat.okd.insurance.lan
+          nameserver "{{ ansible_host }}"
       backup: yes
 
     - name: Set up directory for git clone
@@ -133,7 +133,7 @@
 
     - name: set hostname
       hostname:
-        name: {{ ansible_hostname }}
+        name: "{{ ansible_hostname }}"
 
     - name: prepare static routing
       copy:
