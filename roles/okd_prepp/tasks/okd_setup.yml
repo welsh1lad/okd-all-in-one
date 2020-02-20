@@ -160,3 +160,8 @@
         path: /etc/sysconfig/network-scripts/ifcfg-ens224
         state: absent
    
+    - name: Create a new and correctected resolv.conf file
+      template:
+        src: resolv.j2
+        dest: "/etc/resolv.conf"
+      backup: yes
