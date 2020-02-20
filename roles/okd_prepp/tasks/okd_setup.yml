@@ -60,8 +60,8 @@
     - name: Create DNSMASQ Conf file
       copy:
         dest: "/etc/dnsmasq.d/okd.conf"
-        content: |
-          address=/.uat.okd.insurance.lan/10.60.10.27
+        content:
+          address=/.uat.okd.insurance.lan/{{ ansible_host }}
           resolv-file=/etc/resolv.conf.upstream
 
     - name: copy new resolv to upstream
@@ -69,6 +69,14 @@
         src: /etc/resolv.conf
         dest: /etc/resolve.conf.upstream
         remote_src: yes
+
+    - name: Create a new and correctected resolv.conf file
+      copy:
+        dest: "/etc/resolv.conf"
+        content:
+        search cluster.local uat.okd.insurance.lan
+        nameserver {{ ansible_host }}
+      backup: yes
 
     - name: Set up directory for git clone
       file:
@@ -96,17 +104,17 @@
         dest: /root/OKD/
         mode: '0755'
  
-    - name: Copy resolve.conf to Upstream
-      copy:
-        src: /etc/resolv.conf
-        dest: /etc/resolv.con.upstrem
-        remote_src: yes
+ #   - name: Copy resolve.conf to Upstream
+ #     copy:
+ #       src: /etc/resolv.conf
+ #       dest: /etc/resolv.con.upstrem
+ #       remote_src: yes
    
-    - name: Reconfigure Resolv.conf
-      copy:
-        src: resolv.conf
-        dest: /etc/resolv.conf
-        backup: yes
+ #   - name: Reconfigure Resolv.conf
+ #     copy:
+ #       src: resolv.conf
+ #       dest: /etc/resolv.conf
+ #       backup: yes
 
     - name: Make sure gateway is configured
       lineinfile:
@@ -125,7 +133,7 @@
 
     - name: set hostname
       hostname:
-        name: master
+        name: {{ ansible_hostname }}
 
     - name: prepare static routing
       copy:
@@ -149,11 +157,11 @@
         line: '#no-resolve'
         state: present
 
-    - name: remove old entry in /etc/hosts file 
-      lineinfile:
-        path: /etc/hosts
-        regexp: 'DRS-TEST01-OKD'
-        line: '10.60.10.27  master.uat.okd.insurance.lan'
+#    - name: remove old entry in /etc/hosts file 
+#      lineinfile:
+#        path: /etc/hosts
+#        regexp: 'DRS-TEST01-OKD'
+#        line: '10.60.10.27  master.uat.okd.insurance.lan'
        
     - name: restart dnsmasq
       service:
