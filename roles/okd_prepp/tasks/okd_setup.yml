@@ -51,7 +51,15 @@
       yum:
         name: https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
         state: installed
-
+    
+    - name: Download and install openshift-ansible
+      git:
+        repo: 'https://github.com/openshift/openshift-ansible.git'
+        dest: /root/OKD/OKD_Install
+        version: release-3.11
+      become: yes
+      when: git.stat.exists == False
+    
     #- name: Install Openshift-Ansible Playbooks
     #  yum:
     #    name: openshift-ansible
@@ -102,18 +110,6 @@
         src:  hosts_aio2
         dest: /root/OKD/
         mode: '0755'
- 
- #   - name: Copy resolve.conf to Upstream
- #     copy:
- #       src: /etc/resolv.conf
- #       dest: /etc/resolv.con.upstrem
- #       remote_src: yes
-   
- #   - name: Reconfigure Resolv.conf
- #     copy:
- #       src: resolv.conf
- #       dest: /etc/resolv.conf
- #       backup: yes
 
     - name: Make sure gateway is configured
       lineinfile:
