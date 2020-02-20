@@ -142,12 +142,6 @@
         regexp: '^no-resolv'
         line: '#no-resolve'
         state: present
-
-#    - name: remove old entry in /etc/hosts file 
-#      lineinfile:
-#        path: /etc/hosts
-#        regexp: 'DRS-TEST01-OKD'
-#        line: '10.60.10.27  master.uat.okd.insurance.lan'
        
     - name: restart dnsmasq
       service:
