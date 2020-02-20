@@ -3,17 +3,17 @@
   vm_network_name: Management_VM_210
   
   vm2_name: DRS-TEST02-OKD
-  vm2_hostname:  master_rob
+  vm2_hostname:  master-rob.uat.okd.insurance.lan
   vm2_ip: 10.60.10.28
 
   vm3_name: DRS-TEST03-OKD
-  vm3_hostname:  master_gary
+  vm3_hostname:  master-gary.uat.okd.insurance.lan
   vm3_ip: 10.60.10.32
 
   vm4_name: DRS-TEST04-OKD
-  vm4_hostname:  master_lukasz
+  vm4_hostname:  master-lukasz.uat.okd.insurance.lan
   vm4_ip: 10.60.10.33
 
   vm5_name: DRS-TEST05-OKD
-  vm5_hostname:  master_tomos
+  vm5_hostname:  master-tomos.uat.okd.insurance.lan
   vm5_ip: 10.60.10.34
