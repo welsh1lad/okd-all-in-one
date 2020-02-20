@@ -1,0 +1,3 @@
+vars:
+  search_domain1: cluster.local
+  search_domain2: uat.okd.insurance.lan

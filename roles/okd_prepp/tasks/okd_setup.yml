@@ -71,11 +71,9 @@
         remote_src: yes
 
     - name: Create a new and correctected resolv.conf file
-      copy:
+      template:
+        src: resolv.j2
         dest: "/etc/resolv.conf"
-        content:
-          search cluster.local uat.okd.insurance.lan
-          nameserver "{{ ansible_host }}"
       backup: yes
 
     - name: Set up directory for git clone
