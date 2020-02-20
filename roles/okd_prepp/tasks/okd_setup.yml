@@ -72,11 +72,10 @@
 
     
     - name: Create DNSMASQ Conf file
-      copy:
+      template:
+        src: okd.j2
         dest: "/etc/dnsmasq.d/okd.conf"
-        content:
-          address=/.uat.okd.insurance.lan/{{ ansible_host }}
-          resolv-file=/etc/resolv.conf.upstream
+      backup: yes  
 
     - name: copy new resolv to upstream
       copy:
