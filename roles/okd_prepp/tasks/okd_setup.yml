@@ -81,7 +81,8 @@
         src: /etc/resolv.conf
         dest: /etc/resolv.conf.upstream
         remote_src: yes
-
+      backup: yes
+      
     - name: Create a new and correctected resolv.conf file
       template:
         src: resolv.j2
