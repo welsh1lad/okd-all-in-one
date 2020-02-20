@@ -74,8 +74,7 @@
     - name: Create DNSMASQ Conf file
       template:
         src: okd.j2
-        dest: "/etc/dnsmasq.d/okd.conf"
-      backup: yes  
+        dest: "/etc/dnsmasq.d/okd.conf"  
 
     - name: copy new resolv to upstream
       copy:
@@ -87,7 +86,7 @@
       template:
         src: resolv.j2
         dest: "/etc/resolv.conf"
-      backup: yes
+      
 
     - name: Set up directory for git clone
       file:
