@@ -1,2 +1,17 @@
 [okd]
-10.60.10.34
+10.60.10.34 ansible_hostname=master_tomos
+10.60.10.32 ansible_hostname=master_gary
+10.60.10.33 ansible_hostname=master_lukasz
+10.60.10.28 ansible_hostname=master_rob
+
+[gary]
+10.60.10.32 ansible_hostname=master_gary
+
+[lukasz]
+10.60.10.33 ansible_hostname=master_lukasz
+
+[tomos]
+10.60.10.34 ansible_hostname=master_tomos
+
+[rob]
+10.60.10.28 ansible_hostname=master_rob
