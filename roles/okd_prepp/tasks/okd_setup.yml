@@ -1,6 +1,7 @@
 ---
     - include_vars: main.yml
     - include_tasks: new_machine_id.yml
+    
     - name: Remove Swap
       command: swapoff -a
     

@@ -15,3 +15,7 @@
 
 [rob]
 10.60.10.28 ansible_hostname=master_rob
+
+[workshop:childrent]
+gary
+lukasz

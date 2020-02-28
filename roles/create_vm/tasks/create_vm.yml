@@ -52,10 +52,10 @@
     delegate_to: localhost
     register: deploy
     with_items:
-       - { vm_name: "{{ vm2_name }}", hostname: "{{ vm2_hostname }}", addr: "{{ vm2_ip }}", network_name: "{{ vm_network_name }}"  }
+   #    - { vm_name: "{{ vm2_name }}", hostname: "{{ vm2_hostname }}", addr: "{{ vm2_ip }}", network_name: "{{ vm_network_name }}"  }
        - { vm_name: "{{ vm3_name }}", hostname: "{{ vm3_hostname }}", addr: "{{ vm3_ip }}", network_name: "{{ vm_network_name }}"  }
        - { vm_name: "{{ vm4_name }}", hostname: "{{ vm4_hostname }}", addr: "{{ vm4_ip }}", network_name: "{{ vm_network_name }}"  }
-       - { vm_name: "{{ vm5_name }}", hostname: "{{ vm5_hostname }}", addr: "{{ vm5_ip }}", network_name: "{{ vm_network_name }}"  }
+   #    - { vm_name: "{{ vm5_name }}", hostname: "{{ vm5_hostname }}", addr: "{{ vm5_ip }}", network_name: "{{ vm_network_name }}"  }
 
 
    

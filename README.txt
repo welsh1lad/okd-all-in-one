@@ -90,6 +90,11 @@ cluster.local to be added to search domain in resolv.conf
 
 search cluster.local default.svc.cluster.local svc.cluster.local cluster.local default.svc
 
+CNI / CRD errors
+fix with 
+echo "nameserver 8.8.8.8" >  /etc/origin/node/resolv.conf
+
+
 add /etc/resolv.conf  /etc/origin/node/resolv.conf
 
 create user
@@ -140,7 +145,7 @@ BOOTPROTO=static
 NETMASK=255.255.255.0
 IPADDR=10.60.10.27
 PEERDNS=no
-
+NM_CONTROLLED=no
 check_link_down() {
  return 1;
 }
