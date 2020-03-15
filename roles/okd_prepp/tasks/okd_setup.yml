@@ -97,7 +97,7 @@
          state: present
          regexp: '^GATEWAY'
          insertafter: '^NAME'
-         line: 'GATEWAY=10.60.10.1'
+         line: 'GATEWAY="{{GATEWAY}}"'
     
     - name: Network Peers no
       lineinfile:
