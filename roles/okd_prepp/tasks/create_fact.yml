@@ -1,6 +1,0 @@
----
- - name: create factor for node 
-   template:
-     src: platform.j2
-     dest: /opt/puppetlabs/facter/facts.d/platform.sh
-     mode: a+x

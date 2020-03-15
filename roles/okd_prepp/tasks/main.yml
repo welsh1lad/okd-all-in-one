@@ -2,8 +2,5 @@
    - name: Start Preparing Node to Accecpt install of OKD
      become: yes
      include_tasks: okd_setup.yml
-   - name: Prepare node to connect to puppet
-     include_tasks: puppet_client.yml
-   - name: Create Facts for new server
-     include_tasks: create_fact.yml
+   
       

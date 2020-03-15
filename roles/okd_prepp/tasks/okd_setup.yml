@@ -5,12 +5,6 @@
     - name: Remove Swap
       command: swapoff -a
     
-    - name: Remove Yum proxy settings
-      lineinfile:
-        path: /etc/yum.conf
-        state: absent
-        regexp: '^proxy'
-
    
     - name: setup docker
       import_tasks: docker-set-up.yml
