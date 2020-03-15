@@ -1,9 +1,0 @@
----
- #Variables for ESI infrustructure 
-  vcenter_hostname: edrsvcapv01.insurance.lan
- # datastore_name: 'datastore1 (2)'
-  datastore_name: 'datastore1 (6)'
-  cluster: DRS_UAT_CLUSTER
-  datacenter_name: DRS
-  rhel_template: CentOS-7-Template_DR
-  folder: Linux_vms
