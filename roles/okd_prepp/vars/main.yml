@@ -2,3 +2,5 @@
   search_domain1: cluster.local
   search_domain2: uat.okd.insurance.lan
   GATEWAY: 192.168.178.1
+  block_device: /dev/vdb
+  partition: /dev/vdb1

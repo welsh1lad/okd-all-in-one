@@ -1,0 +1,6 @@
+[okd]
+192.168.178.48 
+[okd:vars]
+ansible_username=vagrant 
+ansible_password=vagrant 
+ansible_become=yes

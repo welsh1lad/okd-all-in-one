@@ -3,7 +3,7 @@
    - name: Create partition
      parted:
        label: gpt
-       device: /dev/sdb
+       device: "{{ block_device }}"
        number: 1
        flags: [ lvm ]
        part_type: primary
@@ -14,13 +14,13 @@
    - name: Create additional file system
      filesystem:
        fstype: lvm
-       dev: /dev/sdb1
+       dev: "{{ partition }}"
     
      
    - name: Create Physical Volumn group on the LVM Group on newly created Dirve
      lvg:
        vg: docker-vg
-       pvs: /dev/sdb1
+       pvs: "{{ partition }}"
        state: present
  
 
